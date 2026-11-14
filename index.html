@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DNA Genome Prediction</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>🧬 DNA Genome Prediction</h1>
+    <p>AI and Machine Learning Based DNA Classification</p>
+</header>
+
+<div class="container">
+
+    <h2>DNA Sequence Predictor</h2>
+
+    <p>Enter your DNA sequence using A, T, G and C.</p>
+
+    <form method="POST">
+
+        <textarea
+            name="sequence"
+            rows="4"
+            placeholder="Example: ATGCGCGATC"
+            required>{{ dna if dna else '' }}</textarea>
+
+        <button type="submit">
+            Predict DNA Sequence
+        </button>
+
+    </form>
+
+    {% if error %}
+        <div class="result">
+            <h2>Error</h2>
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    {% if prediction %}
+
+    <div class="result">
+
+        <h2>Prediction Result</h2>
+
+        <h3>{{ prediction }}</h3>
+
+        <p>DNA Sequence: {{ dna }}</p>
+
+        <h3>Extracted Features</h3>
+
+        <p>A Count: {{ features[0] }}</p>
+        <p>T Count: {{ features[1] }}</p>
+        <p>G Count: {{ features[2] }}</p>
+        <p>C Count: {{ features[3] }}</p>
+        <p>Sequence Length: {{ features[4] }}</p>
+        <p>GC Content: {{ "%.2f"|format(features[5]) }}%</p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<footer>
+    <p>DNA Genome Prediction Project</p>
+    <p>Python | Flask | HTML | CSS | Machine Learning</p>
+</footer>
+
+</body>
+</html>
